@@ -17,7 +17,10 @@ public class User {
 
     // TODO this class needs to be extended with references to Player and
     //      the other way round (similar to the reference from Game to Player
-    //      and the other way round.
+    //      and the other way round. -- done
+
+    @OneToMany(mappedBy = "user")
+    private List<Player> players;
 
     public long getUid() {
         return uid;
@@ -33,6 +36,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
 }
