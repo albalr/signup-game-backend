@@ -34,3 +34,6 @@ build/
 
 ### H2 database for running application
 /db/
+
+
+.DS_Store
