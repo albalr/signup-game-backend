@@ -31,7 +31,7 @@ public class Game {
         return uid;
     }
 
-    public void setUid(long id) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 
