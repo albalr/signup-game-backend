@@ -23,4 +23,15 @@ public class UserController {
     public List<User> searchUsers(@RequestParam("name") String name) {
         return userService.searchUsers(name);
     }
+
+    // we use postmapping instead of getmapping because we create and send, and not retrieve
+    @PostMapping("/register")
+    public User registerUser(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
+
+    @GetMapping("/{username}")
+    public User getUserByUsername(@PathVariable String username) {
+        return userService.findByUsername(username);
+    }
 }

@@ -20,4 +20,20 @@ public class UserService {
         List<User> user = userRepository.findByName(name);
         return user;
     }
+
+    public User registerUser(User user) {
+        if (!userRepository.findByUsername(user.getUsername()).isEmpty()) {
+            throw new RuntimeException("Username already exists");
+        }
+        return userRepository.save(user);
+    }
+
+    public User findByUsername(String username) {
+        List<User> users = userRepository.findByUsername(username);
+        if (users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
+    }
 } 
