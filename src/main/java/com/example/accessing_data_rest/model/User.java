@@ -10,8 +10,11 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) // autoincrement; starts at 1602 for some reason
     private long uid;
+
+    @Column(unique = true) // i.e. primary key like in SQL
+    private String username;
 
     private String name;
 
@@ -19,7 +22,7 @@ public class User {
     //      the other way round (similar to the reference from Game to Player
     //      and the other way round. -- done
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user") // i.e. one to many relationship in DB
     private List<Player> players;
 
     public long getUid() {
@@ -28,6 +31,14 @@ public class User {
 
     public void setUid(long uid) {
         this.uid = uid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
