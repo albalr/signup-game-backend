@@ -18,9 +18,13 @@ public class UserService {
     }
 
     public List<User> searchUsers(String name) {
-        List<User> user = userRepository.findByName(name);
-        return user;
+        List<User> users = userRepository.findByName(name);
+        for (User u : users) {
+            u.setPlayers(null);  // Strip players to avoid nested deserialization
+        }
+        return users;
     }
+
 
     public User registerUser(String name) {
         List<User> existing = userRepository.findByName(name);
