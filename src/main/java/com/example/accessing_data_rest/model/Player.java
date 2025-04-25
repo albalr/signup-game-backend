@@ -1,9 +1,15 @@
 package com.example.accessing_data_rest.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 
 @Entity
+@JsonIdentityInfo(
+        scope=Player.class,
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "uid")
 public class Player {
 
     // FIXME the ID of this could actually be the two foreign keys game_id and
@@ -23,6 +29,9 @@ public class Player {
     @ManyToOne
     private User user;
 
+    public Player() {
+        // Required for Jackson
+    }
     public long getUid() {
         return uid;
     }
