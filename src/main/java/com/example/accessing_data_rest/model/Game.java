@@ -33,6 +33,8 @@ public class Game {
     @OneToMany(mappedBy="game")
     private List<Player> players;
 
+    private String owner;
+
     public Game() {
         // Required for Jackson
     }
@@ -75,6 +77,14 @@ public class Game {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
 }
