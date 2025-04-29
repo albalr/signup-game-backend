@@ -24,6 +24,9 @@ public class Game {
 
     private int maxPlayers;
 
+    @Enumerated(EnumType.STRING)
+    private GameState state;
+
     // TODO There could be more attributes here, kie
     //      in which state is the sign up for the game, did
     //      the game started or finish (after the game started
@@ -85,6 +88,14 @@ public class Game {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public GameState getState() {
+        return state;
+    }
+
+    public void setState(GameState state) {
+        this.state = state;
     }
 
 }
