@@ -12,9 +12,6 @@ import jakarta.persistence.*;
         property = "uid")
 public class Player {
 
-    // FIXME the ID of this could actually be the two foreign keys game_id and
-    //       user_id, but this is a bit tricky to start with. So this will
-    //       Not be done in the context of course 02324! -- done
     @Id
     @Column(name="player_id")
     @GeneratedValue(strategy = GenerationType.AUTO)

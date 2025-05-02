@@ -24,16 +24,20 @@ public class Game {
 
     private int maxPlayers;
 
-    // TODO There could be more attributes here, kie
-    //      in which state is the sign up for the game, did
-    //      the game started or finish (after the game started
-    //      you might not want new players coming in etc.)
-    //      See analogous classes in client.
-
-    @OneToMany(mappedBy="game")
+    @OneToMany(mappedBy="game", fetch = FetchType.EAGER)
     private List<Player> players;
 
     private String owner;
+
+    public enum GameStatus {
+        INITIAL,
+        SIGNUP,
+        ACTIVE,
+        FINISHED
+    }
+
+    @Enumerated(EnumType.STRING) // for JPA/Hibernate DB stuff
+    private GameStatus status = GameStatus.SIGNUP;
 
     public Game() {
         // Required for Jackson
@@ -85,6 +89,14 @@ public class Game {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(GameStatus status) {
+        this.status = status;
     }
 
 }

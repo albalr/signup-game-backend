@@ -21,14 +21,10 @@ public class User {
 
     private String name;
 
-    // TODO this class needs to be extended with references to Player and
-    //      the other way round (similar to the reference from Game to Player
-    //      and the other way round. -- done
-
     @OneToMany(mappedBy = "user")
     private List<Player> players;
 
-    public User() {
+    public User() { // constructor
         // Required for Jackson
     }
 
