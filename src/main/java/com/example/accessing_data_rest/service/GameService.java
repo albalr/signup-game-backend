@@ -2,11 +2,14 @@ package com.example.accessing_data_rest.service;
 
 import com.example.accessing_data_rest.model.Game;
 import com.example.accessing_data_rest.model.Player;
+import com.example.accessing_data_rest.model.User;
 import com.example.accessing_data_rest.repositories.GameRepository;
 import com.example.accessing_data_rest.repositories.PlayerRepository;
+import com.example.accessing_data_rest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 
@@ -18,6 +21,9 @@ public class GameService {
 
     @Autowired
     private PlayerRepository playerRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public List<Game> getGames() {
         List<Game> games = (List<Game>) gameRepository.findAll();
@@ -60,7 +66,22 @@ public class GameService {
         game.setMaxPlayers(maxPlayers);
         game.setOwner(owner);
         game.setStatus(Game.GameStatus.SIGNUP);
-        return gameRepository.save(game);
+
+        Game savedGame = gameRepository.save(game); // save game
+
+        // Auto-join owner as a player
+        List<User> user = userRepository.findByName(owner);
+        User ownerUser = user.get(0);
+
+        Player player = new Player();
+        player.setName(owner);
+        player.setUser(ownerUser);      // associate user
+        player.setGame(savedGame);          // associate game
+
+        playerRepository.save(player);
+
+        return savedGame;
+
     }
 
     public Game getGameById(Long id) {
@@ -190,7 +211,7 @@ public class GameService {
         }
         
         Player newPlayer = new Player();
-        newPlayer.setName(username);                        // convinetly sets player name to username
+        newPlayer.setName(username);                        // conveniently sets player name to username
         
         if (game.getPlayers() == null) {
             game.setPlayers(new ArrayList<>());
