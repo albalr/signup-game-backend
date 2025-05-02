@@ -55,10 +55,6 @@ public class PlayerService {
                 throw new IllegalStateException("You have already joined this game");
             }
 
-            if (game.getOwner().equals(user.getName())) { //is creator  
-                throw new IllegalStateException("You are already the host of this game!");
-            }
-
             if (game.getStatus() != Game.GameStatus.SIGNUP) { // signup phase  
                 throw new IllegalStateException("This game is not accepting new players at the moment");
             }

@@ -36,8 +36,8 @@ public class PlayerController {
             String userRef = (String) playerData.get("user");
             String gameRef = (String) playerData.get("game");
             
-            Long userId = extractIdFromHalReference(userRef);        // get ID from HAL
-            Long gameId = extractIdFromHalReference(gameRef);
+            Long userId = extractIdFromReference(userRef);        // get ID
+            Long gameId = extractIdFromReference(gameRef);
             
             playerService.createPlayerFromIds(name, userId, gameId); // create player
             return ResponseEntity.noContent().build();
@@ -58,7 +58,7 @@ public class PlayerController {
     }
 
     // saves some lines of code to do helper method
-    private Long extractIdFromHalReference(String reference) {
+    private Long extractIdFromReference(String reference) {
         if (reference == null) {
             throw new IllegalStateException("Reference cannot be null");
         }
