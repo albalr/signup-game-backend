@@ -27,6 +27,11 @@ public class PlayerController {
         return playerService.searchPlayers(name);
     }
 
+    @GetMapping(value = "/players/user/{userId}", produces = "application/json")
+    public List<Player> getPlayersByUser(@PathVariable Long userId) {
+        return playerService.getPlayersByUser(userId);
+    }
+
     // POST
     // this is all necessary for HAL links to work.
     @PostMapping(value = "/player", consumes = "application/json")
@@ -50,11 +55,6 @@ public class PlayerController {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("message", "An unexpected error occurred: " + e.getMessage()));
         }
-    }
-
-    @GetMapping(value = "/players/user/{userId}", produces = "application/json")
-    public List<Player> getPlayersByUser(@PathVariable Long userId) {
-        return playerService.getPlayersByUser(userId);
     }
 
     // saves some lines of code to do helper method

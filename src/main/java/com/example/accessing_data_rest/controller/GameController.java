@@ -17,7 +17,7 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    // GETs
+    // GET
     @GetMapping(value = "/allgames", produces = "application/json")
     public List<Game> getAllGames() {
         return gameService.getGames();
@@ -48,7 +48,7 @@ public class GameController {
         return gameService.isHost(id, username);
     }
 
-    // POSTs 
+    // POST
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public Game createGame(@RequestBody Game game) {
         return gameService.createGame(
@@ -108,7 +108,7 @@ public class GameController {
         }
     }
 
-    
+    // DELETE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteGame(@PathVariable Long id, @RequestParam("username") String username) {
         try {
